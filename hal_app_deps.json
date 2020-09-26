@@ -1,0 +1,38 @@
+{
+    "applications": [
+        {
+            "appName": "DecisionSpace365 Geoscience v1",
+            "resourceProviders": [
+                "Microsoft.ContainerService",
+                "Microsoft.ContainerRegistry"
+            ],
+            "vmTypes": [
+                "Standard_D2s_v3" 
+            ]
+        },
+        {
+            "appName": "DecisionSpace365 Geoscience v2",
+            "resourceProviders": [
+                "Microsoft.ContainerService",
+                "Microsoft.ContainerRegistry",
+                "Microsoft.NetApp"
+            ]
+        },
+        {
+            "appName": "DS365 Well Construction",
+            "resourceProviders": [
+                "Microsoft.ContainerService",
+                "Microsoft.ContainerRegistry"
+            ]
+            
+        },
+        {
+            "appName": "DWP",
+            "resourceProviders": [
+                "Microsoft.ContainerService",
+                "Microsoft.ContainerRegistry",
+                "Microsoft.Kubernetes"
+            ]
+        }
+    ]
+}
