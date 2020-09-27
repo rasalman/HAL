@@ -29,11 +29,19 @@ foreach ($vmType in $vmTypes) {
 }
         
 $HalAppData = Get-Content -Raw -Path C:\hal\hal_app_deps.json | ConvertFrom-Json
+$header = "Application Name"
+$firstrow = $true
 foreach ( $app in $HalAppData.applications) {
     
     $row = $app.appName
     
+
     foreach ( $location in $hash.Keys) { 
+        if ($firstrow -eq $true) {
+            $header += ", " + $location 
+        }
+        
+
         $resources = $hash[ $location ]
         $hasResources = $true
         
@@ -58,19 +66,16 @@ foreach ( $app in $HalAppData.applications) {
         else {
             $row += ", N"
         } 
+        
 
     }
-   
-    foreach($app in $app.appName){
-        $line = $app.DisplayName
-        foreach($row in $hasResources){
-            $line += ", " + $hasResources
-        }
-        Write-Host -Object $app, $hasResources
+    
+    if ($firstrow -eq $true){
+        $header
+        $firstrow = $false
     }
-    
+
+    $row
 
     
-
-    
-} 
+}
