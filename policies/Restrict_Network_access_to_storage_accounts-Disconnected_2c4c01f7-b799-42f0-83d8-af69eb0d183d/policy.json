@@ -1,0 +1,50 @@
+{
+ "properties": {
+  "displayName": "Restrict Network access to storage accounts-Disconnected",
+  "policyType": "Custom",
+  "mode": "Indexed",
+  "description": "Network access restriction for disconnected storage accounts.",
+  "metadata": {
+   "category": "Storage",
+   "createdBy": "afeecc1f-6a4e-4c74-b130-22fa409b3d60",
+   "createdOn": "2020-10-06T18:41:30.4598994Z",
+   "updatedBy": "afeecc1f-6a4e-4c74-b130-22fa409b3d60",
+   "updatedOn": "2020-10-22T13:07:50.3636522Z"
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "The effect determines what happens when the policy rule is evaluated to match"
+    },
+    "allowedValues": [
+     "Audit",
+     "Deny",
+     "Disabled"
+    ],
+    "defaultValue": "Audit"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "equals": "Microsoft.Storage/storageAccounts"
+     },
+     {
+      "field": "Microsoft.Storage/storageAccounts/networkAcls.defaultAction",
+      "notEquals": "Deny"
+     }
+    ]
+   },
+   "then": {
+    "effect": "[parameters('effect')]"
+   }
+  }
+ },
+ "id": "/subscriptions/bec388ae-6bb6-4ce4-b730-23b9f855347c/providers/Microsoft.Authorization/policyDefinitions/2c4c01f7-b799-42f0-83d8-af69eb0d183d",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "2c4c01f7-b799-42f0-83d8-af69eb0d183d"
+}

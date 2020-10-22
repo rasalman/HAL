@@ -1,0 +1,31 @@
+name: manage-azure-policy-d393a677
+on:
+  workflow_dispatch:
+    inputs:
+      remarks:
+        description: 'Reason for triggering the workflow run'
+        required: false
+        default: 'Updating Azure Policies'
+
+
+## Uncomment the following if you wish to automatically trigger workflow run with every commit
+#
+#  push:
+#    paths:
+#      - 'policies/Restrict_Network_access_to_storage_accounts-Disconnected_2c4c01f7-b799-42f0-83d8-af69eb0d183d/**'
+#      - .github/workflows/manage-azure-policy-d393a677.yml
+jobs:
+  apply-azure-policy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_CREDENTIALS_d393a677}}
+    - name: Create or Update Azure Policies
+      uses: azure/manage-azure-policy@v0
+      with:
+        paths: |
+          policies/Restrict_Network_access_to_storage_accounts-Disconnected_2c4c01f7-b799-42f0-83d8-af69eb0d183d/**
